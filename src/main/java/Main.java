@@ -4,7 +4,8 @@ public class Main
 {
     public static void main(String[] args) {
     Hamming hamming = new Hamming();
-    BitSet output = hamming.HammingEncode("ab");
+    BitSet input = hamming.ConvertToBitset("a");
+    BitSet output = hamming.HammingEncode("joep");
     hamming.printBitSet(output);
     // write your code here
     }

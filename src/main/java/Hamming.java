@@ -15,25 +15,33 @@ public class Hamming
     public BitSet HammingEncode(String inputstring)
     {
         BitSet input = ConvertToBitset(inputstring);
-        BitSet output = new BitSet(input.length()/7*11);
+        BitSet output = new BitSet();
         printBitSet(input);
+
         for(int i = 0; i<input.length(); i += 8)
         {
-            System.out.println(i);
-            BitSet temp = output.get(i,i+7);
-            BitSet tempoutput = Hamming7(temp);
-            printBitSet(tempoutput);
-            ConcatBitSet(i,i+7,output,tempoutput);
-            printBitSet(output);
+            System.out.println("start index: "+ i);
+            BitSet temp = input.get(i,i+7);
+            temp = Hamming7(temp);
+            printBitSet(temp);
+            output = ConcatBitSet(output,temp);
         }
         return output;
     }
 
-    private BitSet ConcatBitSet(int StartIndex,int EndIndex,BitSet output, BitSet toConcat)
+    private BitSet ConcatBitSet(BitSet input, BitSet toConcat)
     {
-        for(int i = 0;i<(EndIndex-StartIndex);i++)
+        int StartIndex = input.length();
+        int EndIndex = toConcat.length();
+        System.out.println(StartIndex);
+        BitSet output = new BitSet(StartIndex+EndIndex);
+        for(int i = 0;i<StartIndex;i++)
         {
-            output.set(StartIndex+i,toConcat.get(i));
+            output.set(i,input.get(i));
+        }
+        for(int i = 0;i<EndIndex;i++)
+        {
+            output.set(i+StartIndex,toConcat.get(i));
         }
         return output;
     }
@@ -111,6 +119,6 @@ public class Hamming
     public void printBitSet(BitSet set)
     {
         Gson gson = new Gson();
-        System.out.println(gson.toJson(set));
+        System.out.println("current bits: "+ gson.toJson(set));
     }
 }
