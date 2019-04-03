@@ -12,7 +12,7 @@ public class Main
 //    hamming.printBitSet(output,11);
 //    String test = hamming.hammingDecode(output);
 //    System.out.println(test);
-        System.out.println(hamming.hammingEncodewithNoiseString("test"));
+        System.out.println("Output: "+hamming.hammingEncodewithNoiseString("test"));
 
     // write your code here
     }
